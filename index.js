@@ -28,6 +28,12 @@ app.post("/api/arashi", (req, res) => {
   res.send(newMember);
 });
 
+app.put("/api/arashi/:id", (req, res) => {
+  const member = arashi.find((member) => member.id === parseInt(req.params.id));
+  member.name = req.body.name;
+  res.send(member);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

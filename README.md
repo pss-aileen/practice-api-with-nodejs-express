@@ -336,9 +336,9 @@ Postmanでデータを追加できるかテストをする。
 - Add request として、リクエストを作成
   - method: POST
   - URL: `localhost:3000/api/arashi`
-  - Body: `{ "name": "Kazuya" }`
+  - Body(row):  `{ "name": "Kazuya" }`
 - 上記を設定したら、"Send" とする
-- レスポンスのbodyには以下のように表示されていればOK
+- レスポンスのbodyに以下のように表示されていればOK
   ```json
   {
       "id": 6,
@@ -359,6 +359,54 @@ Postmanでデータを追加できるかテストをする。
 
 ### HTTP PUT requests のルーティングを設定する
 
+`idnex.js` に `arashi` のメンバーの名前を修正するルーティングを作成する。
+
+```js
+app.put("/api/arashi/:id", (req, res) => {
+  const member = arashi.find((member) => member.id === parseInt(req.params.id));
+  member.name = req.body.name;
+  res.send(member);
+});
+```
+
+Postmanでデータを修正できるかテストをする。
+
+- Add request として、リクエストを作成
+  - method: PUT
+  - URL: `localhost:3000/api/arashi/1`
+  - Body(row): `{ "name": "Felix" }`
+- 上記を設定したら、"Send" とする
+- レスポンスのbodyに以下のように表示されていればOK
+  ```json
+  {
+      "id": 1,
+      "name": "Felix"
+  }
+  ```
+
+<img src="./readme-assets/postman-put.png">
+
+#### コード解説
+- `app.put("/api/arashi/:id", (req, res) => {`
+  - `/api/arashi/:id` というリクエストがあったときにのルーティングの処理を記述している
+  - `:id` とは
+    - `:` 動的ルーティングをするための記号、URLパラメータを定義するために使える
+    - この記号を使うことで、URLの特定の部分を動的に変更し、パラメータとして扱うことができる
+- `const member = arashi.find((member) => member.id === parseInt(req.params.id));`
+  - 入力された `id` と同じデータを `arashi` から探し出し、その「参照値」を格納する
+    - 参照値とは、値を格納しているメモリ上のアドレス [^15]
+    - つまり、値がコピーされて格納されるわけではない、配列（オブジェクト）の内容の場所をそのままコピーしているので、`member` 値の変更をすると `arashi` で定義された内容が変わる
+- `member.name = req.body.name`
+  - `mamber.name` に、リクエストのbodyの `name` の値が代入される
+  - つまり、リクエストされた `id` をもつ `arashi` のメンバーの名前が変更された
+- `res.send(member);`
+  - HTTPリクエストのレスポンスとして `member` の情報を返す
+- 雑調査
+  - find 配列、参照するだけだからcustomersが更新される
+  - [Working with objects - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
+  - [JavaScript data types and data structures - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#objects)
+    - プリミティブ型、参照型
+  
 ### HTTP DELETE requests のルーティングを設定する
 
 
@@ -376,3 +424,4 @@ Postmanでデータを追加できるかテストをする。
 [^12]: Hello world example - Express https://expressjs.com/en/starter/hello-world.html
 [^13]: Application app.listen - Express https://expressjs.com/en/5x/api.html#app
 [^14]: Postman https://www.postman.com/
+[^15]: (javascript) データ型と参照型 https://qiita.com/Tateishi0819/items/51777538dacf0bc7cbc1
