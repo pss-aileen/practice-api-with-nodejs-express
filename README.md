@@ -14,9 +14,11 @@
 1. [サーバーを起動し、リクエストを受け取る準備をする](#サーバーを起動しリクエストを受け取る準備をする)
 1. [最初のルーティングを設定する](#最初のルーティングを設定する)
 1. [HTTP GET requests のルーティングを設定する](#http-get-requests-のルーティングを設定する)
-1. HTTP POST REQUEST
-1. HTTP PUT REQUEST
-1. HTTP DELETE REQUEST
+1. [Postmanのインストールと、データの確認](#postmanのインストールとデータの確認)
+1. [HTTP POST requests のルーティングを設定する](#http-post-requests-のルーティングを設定する)
+1. [HTTP PUT requests のルーティングを設定する](#http-put-requests-のルーティングを設定する)
+1. [HTTP DELETE requests のルーティングを設定する](#http-delete-requests-のルーティングを設定する)
+
 
 ### `package.json` の作成
 
@@ -268,6 +270,30 @@ app.get("/api/arashi", (req, res) => {
 });
 ```
 
+### Postmanのインストールと、データの確認
+
+- インストール
+  - Postman [^14] を公式サイトからインストールする。
+  - アカウントを作成する
+  - ログインする
+- Postmanでの操作
+  - 自分の環境で Postman を起動
+  - コレクションを作成する
+    - Collections で Create new collection として、「Web API with Node.js and Express」とする
+  - GETリクエストを作成する
+    - 左側のタブの作成したコレクションの「・・・」、もしくはソフト上部の「＋」から "Add request" として、リクエストを作成する
+    - method: GET
+    - URL: `localhost:3000/api/arashi`
+    - 上記を記入したら、右側の "Send" をクリック
+    - Body に `arashi` の配列が表示されていれば OK
+
+<img src="./readme-assets/postman.png">
+
+
+#### Postman とは？
+
+API開発のためのツール。HTTPリクエストを送信して、結果を受け取ることができる。HTMLなどでフォームを作ってテストをする必要がないのでお手軽。
+
 ### HTTP POST requests のルーティングを設定する
 
 ### HTTP PUT requests のルーティングを設定する
@@ -288,3 +314,4 @@ app.get("/api/arashi", (req, res) => {
 [^11]: nodemon Usage - npm https://www.npmjs.com/package/nodemon
 [^12]: Hello world example - Express https://expressjs.com/en/starter/hello-world.html
 [^13]: Application app.listen - Express https://expressjs.com/en/5x/api.html#app
+[^14]: https://www.postman.com/
