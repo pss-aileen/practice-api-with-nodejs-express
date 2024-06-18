@@ -9,6 +9,7 @@
 
 1. [package.json の作成](#packagejson-の作成)
 1. [依存関係のインストール](#依存関係のインストール)
+1. [node の動作確認](#node-の動作確認)
 1. nodemon の動作確認
 1. サーバーを起動する
 1. HTTP GET REQUEST
@@ -73,17 +74,47 @@ Node.js を簡単に書くためのフレームワーク。
 
 - `npm install <package-spec>` とは
   - アプリケーションに必ず必要なパッケージを `dependencies` としてインストールするコマンド
-  - Expressは サーバー作成に必要なので、はこちらでインストール
+  - Expressは サーバー作成に必要なので、こちらでインストール
 - `npm insatall <package-spec> --save-dev` とは
   - 開発の間にだけ必要なパッケージを `devDependencies` としてインストールするコマンド
   - テストフレームワークやビルドツールなど
   - nodemon は開発の時だけ必要なので、こちらでインストール
-  
-
-### nodemon の動作確認
 
 
+### node の動作確認
 
+ルートディレクトリに `index.js` を作成、以下を記述。
+
+```js
+console.log("Hello World");
+```
+
+`package.json` の `scripts` に `dev` を記述。
+
+```json
+{
+  "scripts": {
+    "dev": "node index.js"
+  },
+}
+```
+
+ターミナルで以下を実行し、Node.js で index.js ファイルが実行できるか確認する。
+
+実行するとターミナルに `Hello World` と表示される。
+
+```sh
+npm run dev
+```
+
+#### `package.json` の `scripts` とは [^9]
+
+- Node.jsプロジェクトで実行するカスタムコマンドを定義する場所（セクション）。
+- `npm run <user defined>` で実行できる
+- `npm-run-script` とは [^10]
+  - `package.json` の `scripts` に記述されたコマンドを実行する
+
+### npm run 
 
 [^1]: Creating a package.json file - npm https://docs.npmjs.com/creating-a-package-json-file
 [^2]: Running a CLI questionnaire - npm https://docs.npmjs.com/creating-a-package-json-file#running-a-cli-questionnaire
@@ -93,3 +124,5 @@ Node.js を簡単に書くためのフレームワーク。
 [^6]: npm-install - npm Docs https://docs.npmjs.com/cli/v10/commands/npm-install
 [^7]: Specifying dependencies and devDependencies in a package.json file - npm Docs https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file
 [^8]: Difference between dependency and devdependency - Pravin M https://frontendinterviewquestions.medium.com/difference-between-dependency-and-devdependency-2e8812b3f838
+[^9]: npm run <user defined> - scripts - npm Docs https://docs.npmjs.com/cli/v10/using-npm/scripts#npm-run-user-defined
+[^10]: npm-run-script - npm Docs https://docs.npmjs.com/cli/v10/commands/npm-run-script

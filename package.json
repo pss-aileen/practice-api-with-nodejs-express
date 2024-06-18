@@ -4,7 +4,7 @@
   "description": "Node.js と Express を使って、CRUD 操作を行うための基本的な Web API を作成",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node index.js"
   },
   "keywords": [],
   "author": "",
