@@ -15,6 +15,7 @@
 1. [最初のルーティングを設定する](#最初のルーティングを設定する)
 1. [HTTP GET requests のルーティングを設定する](#http-get-requests-のルーティングを設定する)
 1. [Postmanのインストールと、データの確認](#postmanのインストールとデータの確認)
+1. [JSON形式のリクエストボディを解析するためのミドルウェアを設定する](#json形式のリクエストボディを解析するためのミドルウェアを設定する)
 1. [HTTP POST requests のルーティングを設定する](#http-post-requests-のルーティングを設定する)
 1. [HTTP PUT requests のルーティングを設定する](#http-put-requests-のルーティングを設定する)
 1. [HTTP DELETE requests のルーティングを設定する](#http-delete-requests-のルーティングを設定する)
@@ -155,7 +156,7 @@ Hello World, Hi
 
 ### サーバーを起動し、リクエストを受け取る準備をする
 
-`index.js` [^11]
+`index.js` [^11] [^12]
 
 ```js
 const express = require("express");
@@ -294,7 +295,33 @@ app.get("/api/arashi", (req, res) => {
 
 API開発のためのツール。HTTPリクエストを送信して、結果を受け取ることができる。HTMLなどでフォームを作ってテストをする必要がないのでお手軽。
 
+### JSON形式のリクエストボディを解析するためのミドルウェアを設定する
+
+POST形式でJSON形式のリクエストボディを解析する必要があるので設定する。
+
+index.js
+
+```js
+app.use(express.json());
+```
+
+#### `app.use([path,] callback [, callback...])`
+
+> ミドルウェアをアプリケーション全体に適用するためのメソッド。ミドルウェアは、リクエストがサーバーに到達してからレスポンスが返されるまでの間に実行される関数です。<br>
+> byChatGPT
+
+#### `express.json([オプション])`
+
+> `express.json()` は、Expressが提供する組み込みのミドルウェア関数の一つで、リクエストの `Content-Type` が`application/json` である場合にそのリクエストボディを解析し、JavaScript のオブジェクトとして `req.body` に設定します。<br>
+> byChatGPT
+
+
 ### HTTP POST requests のルーティングを設定する
+
+`idnex.js` に arashi のメンバーを追加するルーティングを作成する。
+
+```js
+```
 
 ### HTTP PUT requests のルーティングを設定する
 
@@ -314,4 +341,4 @@ API開発のためのツール。HTTPリクエストを送信して、結果を�
 [^11]: nodemon Usage - npm https://www.npmjs.com/package/nodemon
 [^12]: Hello world example - Express https://expressjs.com/en/starter/hello-world.html
 [^13]: Application app.listen - Express https://expressjs.com/en/5x/api.html#app
-[^14]: https://www.postman.com/
+[^14]: Postman https://www.postman.com/
