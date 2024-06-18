@@ -13,7 +13,7 @@
 1. [nodemon の動作確認](#nodemon-の動作確認)
 1. [サーバーを起動し、リクエストを受け取る準備をする](#サーバーを起動しリクエストを受け取る準備をする)
 1. [最初のルーティングを設定する](#最初のルーティングを設定する)
-1. [HTTP GET requests のルーティングを設定する]
+1. [HTTP GET requests のルーティングを設定する](#http-get-requests-のルーティングを設定する)
 1. HTTP POST REQUEST
 1. HTTP PUT REQUEST
 1. HTTP DELETE REQUEST
@@ -240,6 +240,39 @@ HTTP GET requests のルートを指定し、そこにアクセスすると関�
 - Buffer とは
   - Node.js でバイナリデータを扱うためのオブジェクト。
 
+### HTTP GET requests のルーティングを設定する
+
+arashi のメンバーを表示するルーティングを設定する。
+
+index.js に arashi のメンバーを定義する。
+
+```js
+const arashi = [
+  { id: 1, name: "Aiba"},
+  { id: 2, name: "Matsumoto"},
+  { id: 3, name: "Ninomiya"},
+  { id: 4, name: "Ohno"},
+  { id: 5, name: "Sakurai"},
+];
+```
+
+以下の URL にアクセスしたら、arashi のメンバーを返すようにするために `app.get()` を記述。
+
+```
+http://localhost:3000/api/arashi
+```
+
+```js
+app.get("/api/arashi", (req, res) => {
+  res.send(arashi);
+});
+```
+
+### HTTP POST requests のルーティングを設定する
+
+### HTTP PUT requests のルーティングを設定する
+
+### HTTP DELETE requests のルーティングを設定する
 
 
 [^1]: Creating a package.json file - npm https://docs.npmjs.com/creating-a-package-json-file
