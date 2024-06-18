@@ -10,8 +10,8 @@
 1. [package.json の作成](#packagejson-の作成)
 1. [依存関係のインストール](#依存関係のインストール)
 1. [node の動作確認](#node-の動作確認)
-1. nodemon の動作確認
-1. サーバーを起動する
+1. [nodemon の動作確認](#nodemon-の動作確認)
+1. [サーバーを起動し、リクエストを受け取る準備をする](#サーバーを起動しリクエストを受け取る準備をする)
 1. HTTP GET REQUEST
 1. HTTP POST REQUEST
 1. HTTP PUT REQUEST
@@ -150,6 +150,67 @@ Hello World
 Hello World, Hi
 ```
 
+### サーバーを起動し、リクエストを受け取る準備をする
+
+`index.js` [^11]
+
+```js
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
+ターミナルで `Example app listening on port 3000` と表示されていることを確認する。
+この時、次にファイルに変更があるまで、サーバーは起動したままになっている。
+
+```sh
+[nodemon] restarting due to changes...
+[nodemon] starting `node index.js`
+Example app listening on port 3000
+```
+
+3000 ポートでサーバーを起動しているので、以下のURLをたたくと、ページにアクセスできる。
+まだ、GET メソッドを設定していないので、 `Cannot GET /` と表示される。
+
+```
+http://localhost:3000/
+```
+
+#### Express モジュールの基本的な使い方
+
+Expressのモジュールを利用するために必要な手順は以下の通りです。
+
+Express モジュールをインポートし、それを `express` という定数に格納する。
+
+```js
+const express = require("express");
+```
+
+Expressアプリケーションのインスタンスを作成し、それを `app` という定数に格納する。
+
+これにより、 `app` を使って、ルート設定ができる。
+
+```js
+const app = express();
+```
+
+#### サーバーを起動した状態にし、リクエストを待ち受ける [^13]
+
+```js
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
+- `app.listen([port[, host[, backlog]]][, callback])`
+  - 特定のホストとポートで接続を結びつけて、データを待ち受ける。
+  - HTTPリクエストを受け取るために必要な設定。
+  - `port` の URL `http://localhost:3000/` にアクセスすることができる（ただし、この段階では `Cannot GET /` としか表示されない）
+
 
 [^1]: Creating a package.json file - npm https://docs.npmjs.com/creating-a-package-json-file
 [^2]: Running a CLI questionnaire - npm https://docs.npmjs.com/creating-a-package-json-file#running-a-cli-questionnaire
@@ -162,3 +223,5 @@ Hello World, Hi
 [^9]: npm run <user defined> - scripts - npm Docs https://docs.npmjs.com/cli/v10/using-npm/scripts#npm-run-user-defined
 [^10]: npm-run-script - npm Docs https://docs.npmjs.com/cli/v10/commands/npm-run-script
 [^11]: nodemon Usage - npm https://www.npmjs.com/package/nodemon
+[^12]: Hello world example - Express https://expressjs.com/en/starter/hello-world.html
+[^13]: Application app.listen - Express https://expressjs.com/en/5x/api.html#app
