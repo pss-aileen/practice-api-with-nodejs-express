@@ -4,7 +4,7 @@
   "description": "Node.js と Express を使って、CRUD 操作を行うための基本的な Web API を作成",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

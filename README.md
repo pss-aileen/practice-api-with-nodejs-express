@@ -114,15 +114,51 @@ npm run dev
 - `npm-run-script` とは [^10]
   - `package.json` の `scripts` に記述されたコマンドを実行する
 
-### npm run 
+
+### nodemon の動作確認
+
+package.json の `node` を `nodemon` に書き換える。[^11]
+
+```json
+{
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+}
+```
+
+ターミナルで以下を実行し、Node.js で index.js ファイルを更新するたびに、node が再実行されているか確認する。
+
+```sh
+npm run dev
+```
+
+ターミナルの結果
+
+きちんと、`node index.js` が再実行されている。
+
+```sh
+[nodemon] 3.1.3
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node index.js`
+Hello World
+[nodemon] clean exit - waiting for changes before restart
+[nodemon] restarting due to changes...
+[nodemon] starting `node index.js`
+Hello World, Hi
+```
+
 
 [^1]: Creating a package.json file - npm https://docs.npmjs.com/creating-a-package-json-file
 [^2]: Running a CLI questionnaire - npm https://docs.npmjs.com/creating-a-package-json-file#running-a-cli-questionnaire
 [^3]: Creating a default package.json file - npm https://docs.npmjs.com/creating-a-package-json-file#creating-a-default-packagejson-file
 [^4]: Express - Node.js web application framework https://expressjs.com/
-[^5]: nodemon npm https://www.npmjs.com/package/nodemon
+[^5]: nodemon - npm https://www.npmjs.com/package/nodemon
 [^6]: npm-install - npm Docs https://docs.npmjs.com/cli/v10/commands/npm-install
 [^7]: Specifying dependencies and devDependencies in a package.json file - npm Docs https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file
 [^8]: Difference between dependency and devdependency - Pravin M https://frontendinterviewquestions.medium.com/difference-between-dependency-and-devdependency-2e8812b3f838
 [^9]: npm run <user defined> - scripts - npm Docs https://docs.npmjs.com/cli/v10/using-npm/scripts#npm-run-user-defined
 [^10]: npm-run-script - npm Docs https://docs.npmjs.com/cli/v10/commands/npm-run-script
+[^11]: nodemon Usage - npm https://www.npmjs.com/package/nodemon
