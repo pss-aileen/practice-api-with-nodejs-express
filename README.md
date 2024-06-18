@@ -12,7 +12,8 @@
 1. [node の動作確認](#node-の動作確認)
 1. [nodemon の動作確認](#nodemon-の動作確認)
 1. [サーバーを起動し、リクエストを受け取る準備をする](#サーバーを起動しリクエストを受け取る準備をする)
-1. HTTP GET REQUEST
+1. [最初のルーティングを設定する](#最初のルーティングを設定する)
+1. [HTTP GET requests のルーティングを設定する]
 1. HTTP POST REQUEST
 1. HTTP PUT REQUEST
 1. HTTP DELETE REQUEST
@@ -165,7 +166,7 @@ app.listen(port, () => {
 ```
 
 ターミナルで `Example app listening on port 3000` と表示されていることを確認する。
-この時、次にファイルに変更があるまで、サーバーは起動したままになっている。
+この時、次にファイルの変更があるまで、サーバーは起動したままになっている。
 
 ```sh
 [nodemon] restarting due to changes...
@@ -182,7 +183,7 @@ http://localhost:3000/
 
 #### Express モジュールの基本的な使い方
 
-Expressのモジュールを利用するために必要な手順は以下の通りです。
+Express のモジュールを利用するために必要な手順は以下の通りです。
 
 Express モジュールをインポートし、それを `express` という定数に格納する。
 
@@ -210,6 +211,35 @@ app.listen(port, () => {
   - 特定のホストとポートで接続を結びつけて、データを待ち受ける。
   - HTTPリクエストを受け取るために必要な設定。
   - `port` の URL `http://localhost:3000/` にアクセスすることができる（ただし、この段階では `Cannot GET /` としか表示されない）
+
+
+### 最初のルーティングを設定する
+
+HTTP GET requests のルーティングを設定するため、`index.js` に以下の記述を追加する。
+
+```js
+app.get("/", (req, res) => {
+  res.send('Hello World!')
+});
+```
+
+再度、以下のページにアクセスすると `Hello World!` と表示される。
+
+```
+http://localhost:3000/
+```
+
+#### `app.get(path, callback [, callback ...])` とは
+
+HTTP GET requests のルートを指定し、そこにアクセスすると関数が実行される仕組みを設定する。
+
+#### `res.send([body])`
+
+- HTTP レスポンスを送信する。
+- `body` には、Buffer、String、Boolean、Array を指定できる。
+- Buffer とは
+  - Node.js でバイナリデータを扱うためのオブジェクト。
+
 
 
 [^1]: Creating a package.json file - npm https://docs.npmjs.com/creating-a-package-json-file
