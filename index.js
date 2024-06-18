@@ -19,6 +19,15 @@ app.get("/api/arashi", (req, res) => {
   res.send(arashi);
 });
 
+app.post("/api/arashi", (req, res) => {
+  const newMember = {
+    id: arashi.length + 1,
+    name: req.body.name,
+  };
+  arashi.push(newMember);
+  res.send(newMember);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

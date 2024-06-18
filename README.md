@@ -318,10 +318,44 @@ app.use(express.json());
 
 ### HTTP POST requests のルーティングを設定する
 
-`idnex.js` に arashi のメンバーを追加するルーティングを作成する。
+`idnex.js` に `arashi` のメンバーを追加するルーティングを作成する。
 
 ```js
+app.post("/api/arashi", (req, res) => {
+  const newMember = {
+    id: arashi.length + 1,
+    name: req.body.name,
+  };
+  arashi.push(newMember);
+  res.send(newMember);
+});
 ```
+
+Postmanでデータを追加できるかテストをする。
+
+- Add request として、リクエストを作成
+  - method: POST
+  - URL: `localhost:3000/api/arashi`
+  - Body: `{ "name": "Kazuya" }`
+- 上記を設定したら、"Send" とする
+- レスポンスのbodyには以下のように表示されていればOK
+  ```json
+  {
+      "id": 6,
+      "name": "Kazuya"
+  }
+  ```
+
+<img src="./readme-assets/postman-post.png">
+
+#### コード解説
+
+- `const newMember = {..`: 新しく追加するメンバーの定数を格納する
+- `id: arashi.length + 1,`: `id` は今ある `arashi` 配列の長さ + 1 を指定する
+  - `arashi.length` は 5 で、 それに + 1 で、最初に追加される `id` は `6` となる
+- `name: req.body.name,`: HTTPリクエストボディの `name` で指定されている内容を `name` として指定する
+- `arashi.push(newMember);`: `arashi` 配列に、`newMember` オブジェクトを後ろに追加する
+- `res.send(newMember);`: HTTPリクエストのレスポンスとして、`newMember` の情報を返す
 
 ### HTTP PUT requests のルーティングを設定する
 
