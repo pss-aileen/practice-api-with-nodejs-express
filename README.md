@@ -288,7 +288,7 @@ app.get("/api/arashi", (req, res) => {
     - 上記を記入したら、右側の "Send" をクリック
     - Body に `arashi` の配列が表示されていれば OK
 
-<img src="./readme-assets/postman.png">
+<img src="./readme-assets/postman-get.png">
 
 
 #### Postman とは？
@@ -336,13 +336,13 @@ Postmanでデータを追加できるかテストをする。
 - Add request として、リクエストを作成
   - method: POST
   - URL: `localhost:3000/api/arashi`
-  - Body(row):  `{ "name": "Kazuya" }`
+  - Body(row):  `{ "name": "Ohashi" }`
 - 上記を設定したら、"Send" とする
 - レスポンスのbodyに以下のように表示されていればOK
   ```json
   {
       "id": 6,
-      "name": "Kazuya"
+      "name": "Ohashi"
   }
   ```
 
