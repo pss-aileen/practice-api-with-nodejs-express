@@ -409,6 +409,49 @@ Postmanでデータを修正できるかテストをする。
   
 ### HTTP DELETE requests のルーティングを設定する
 
+`idnex.js` に `arashi` のメンバーの名前を削除するルーティングを作成する。
+
+```js
+app.delete("/api/arashi/:id", (req, res) => {
+  const member = arashi.find((member) => member.id === parseInt(req.params.id));
+  const index = arashi.indexOf(member);
+  arashi.splice(index, 1);
+  res.send(member);
+});
+```
+
+Postmanでデータを削除できるかテストをする。
+
+- Add request として、リクエストを作成
+  - method: DELETE
+  - URL: `localhost:3000/api/arashi/1`
+- 上記を設定したら、"Send" とする
+- レスポンスのbodyに以下のように表示されていればOK
+  ```json
+  {
+      "id": 1,
+      "name": "Aiba"
+  }
+  ```
+
+<img src="./readme-assets/postman-delete.png">
+
+#### コード解説
+- `app.delete("/api/arashi/:id", (req, res) => {`
+  - `/api/arashi/:id` というリクエストがあったときの、データを削除するためのルーティングを設定している
+- `const member = arashi.find((member) => member.id === parseInt(req.params.id));`
+  - `id` に該当するデータを参照する
+- `const index = arashi.indexOf(member);`
+  - 参照したデータに該当する `arashi` の `index` を取得する
+- `arashi.splice(index, 1);`
+  - `arashi` の配列から `index` 番目の値を `1` つ削除する
+- `res.send(member);`
+  - HTTPリクエストのレスポンスとして `member` の情報を返す
+
+
+> [!NOTE]
+> 全体的な手順は以上。エラーハンドリングなどができていないので、後日追記する。
+
 
 [^1]: Creating a package.json file - npm https://docs.npmjs.com/creating-a-package-json-file
 [^2]: Running a CLI questionnaire - npm https://docs.npmjs.com/creating-a-package-json-file#running-a-cli-questionnaire

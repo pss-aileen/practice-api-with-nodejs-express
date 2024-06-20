@@ -34,6 +34,13 @@ app.put("/api/arashi/:id", (req, res) => {
   res.send(member);
 });
 
+app.delete("/api/arashi/:id", (req, res) => {
+  const member = arashi.find((member) => member.id === parseInt(req.params.id));
+  const index = arashi.indexOf(member);
+  arashi.splice(index, 1);
+  res.send(member);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
